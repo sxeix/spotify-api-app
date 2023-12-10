@@ -6,4 +6,5 @@ package com.sxeix.genrecalculator.constants;
 public class SpotifyAuthConstants {
     public static final String CLIENT_CREDENTIALS_AUTH = "%s/token";
     public static final String PLAYLIST_ITEMS = "%s/playlists/%s/tracks";
+    public static final String ARTISTS = "%s/artists?ids=%s";
 }

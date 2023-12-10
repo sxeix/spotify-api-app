@@ -4,21 +4,16 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
- * Track object
+ * Artist dto item
  */
 @Getter
 @Setter
-public class Track {
+public class Artist {
 
     @SerializedName("name")
     private String name;
 
-    @SerializedName("album")
-    private Album album;
-
-    @SerializedName("artists")
-    private List<Artist> artists;
+    @SerializedName("uri")
+    private String uri;
 }

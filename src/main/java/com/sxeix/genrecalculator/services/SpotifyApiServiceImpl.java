@@ -2,6 +2,7 @@ package com.sxeix.genrecalculator.services;
 
 import com.google.gson.Gson;
 import com.sxeix.genrecalculator.caching.Cache;
+import com.sxeix.genrecalculator.dto.ArtistResponse;
 import com.sxeix.genrecalculator.dto.PlaylistItems;
 import com.sxeix.genrecalculator.dto.TokenResponse;
 import com.sxeix.genrecalculator.config.Properties;
@@ -10,9 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.sxeix.genrecalculator.constants.SpotifyAuthConstants.CLIENT_CREDENTIALS_AUTH;
-import static com.sxeix.genrecalculator.constants.SpotifyAuthConstants.PLAYLIST_ITEMS;
+import static com.sxeix.genrecalculator.constants.SpotifyAuthConstants.*;
 
 /**
  * Spotify API service
@@ -54,6 +56,19 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
             String url = String.format(PLAYLIST_ITEMS, properties.getSpotifyApiUrl(), playlistId);
             String response = httpService.doGet(url);
             return new Gson().fromJson(response, PlaylistItems.class);
+        } catch (Exception e) {
+            log.error("Failure to get playlist items", e);
+        }
+        return null;
+    }
+
+    @Override
+    public ArtistResponse getArtists(List<String> ids) {
+        try {
+            String idsParam = String.join(",", ids);
+            String url = String.format(ARTISTS, properties.getSpotifyApiUrl(), idsParam);
+            String response = httpService.doGet(url);
+            return new Gson().fromJson(response, ArtistResponse.class);
         } catch (Exception e) {
             log.error("Failure to get playlist items", e);
         }

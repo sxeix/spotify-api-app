@@ -6,19 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-/**
- * Track object
- */
 @Getter
 @Setter
-public class Track {
-
-    @SerializedName("name")
-    private String name;
-
-    @SerializedName("album")
-    private Album album;
-
+public class ArtistResponse {
     @SerializedName("artists")
-    private List<Artist> artists;
+    List<ArtistWithGenre> artists;
 }
